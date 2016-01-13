@@ -34,7 +34,10 @@ int main() {
         for (int ai = 0; ai < 2; ai++) {
             for (int x = 0; x < n; x++) {
                 if (a[ai][x] == '.' && isw(ai, x+1) && isw(ai, x-1))
-                    dow(1-ai, x);
+                    if (a[1-ai][x] != 'X')
+                       dow(1-ai, x);
+                    else
+                        dow(ai, x);
             }
         }
 
