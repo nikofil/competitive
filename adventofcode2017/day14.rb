@@ -25,7 +25,30 @@ def knot(inp)
     }.join
 end
 
+$h = Hash.new{|x,y| x[y] = []}
+
 inp=gets.strip
-puts (0..127).map{|c|
-    knot("#{inp}-#{c}").to_i(16).to_s(2).count '1'
-}.sum
+prev = []
+mat = (0..127).map{|c|
+    knot("#{inp}-#{c}").to_i(16).to_s(2).rjust 128, '0'
+}
+
+def ad(x1,y1,x2,y2)
+    $h[x1*100000+y1] << x2*100000+y2
+    $h[x2*100000+y2] << x1*100000+y1
+end
+
+(0..127).each{|x|
+    (0..127).each{|y|
+        next if mat[x][y] != '1'
+        ad(x,y,x,y)
+        ad(x-1, y, x, y) if x>0 and mat[x-1][y] == '1'
+        ad(x, y-1, x, y) if y>0 and mat[x][y-1] == '1'
+        ad(x+1, y, x, y) if mat[x+1] and mat[x+1][y] == '1'
+        ad(x, y+1, x, y) if mat[x][y+1] == '1'
+    }
+}
+
+$h.each{|x,y|
+    puts "#{x} <-> #{y.uniq.join ','}"
+}
