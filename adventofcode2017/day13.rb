@@ -1,9 +1,7 @@
-puts STDIN.read.split("\n").map{|l|
-    a, b = l.split(': ').map(&:to_i)
-    if a % ((b-1)*2) == 0 then
-        puts a,b
-        a*b
-    else
-        0
-    end
-}.sum
+inp = STDIN.read.split("\n")
+puts 0.upto(1000000000000).each{|cnt|
+    break cnt unless inp.any?{|l|
+        a, b = l.split(': ').map(&:to_i)
+        (cnt+a) % ((b-1)*2) == 0
+    }
+}
