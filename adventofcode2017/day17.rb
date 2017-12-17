@@ -1,11 +1,13 @@
 s = gets.to_i
 
-a = [0]
+len = 1
 p = 0
+res = 0
 
-2017.times {|c|
-     p = ((p + s) % a.length) + 1
-     a.insert p, c + 1
+50000000.times {|c|
+     p = ((p + s) % len) + 1
+     len += 1
+     res = c+1 if p == 1
 }
 
-puts a[a.index(2017)+1]
+puts res
