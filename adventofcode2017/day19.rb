@@ -1,5 +1,6 @@
 m = STDIN.read.split("\n").map{|x| x+' '} + ['']
 
+cnt = 0
 y = 0
 x = m[0].index '|'
 dx = 0
@@ -30,9 +31,12 @@ loop do
         break if m[y][x] == ' '
         print m[y][x]
     end
+    cnt+=1
     x += dx
     y += dy
     #puts "#{x} #{y}"
 end
 
 #puts x,y
+puts ''
+puts cnt
