@@ -53,7 +53,7 @@ end
 
 boxes = '.#./..#/###'
 
-5.times{
+18.times{
     boxes = fuckingjoin(fuckingsplit(boxes).map{|x|
         n = 3.times.reduce([x]){|acc|
             acc + [rot(acc[-1])]
