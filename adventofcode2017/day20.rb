@@ -1,8 +1,15 @@
-t = 10000000
-puts STDIN.read.split("\n").each_with_index.map{|inp,idx|
-    p,v,a = inp.scan(/<[^>]*>/).map{|x| x[1...-1].split(',').map(&:strip).map(&:to_i)}
-    #puts "#{p} #{v} #{a}"
-    [3.times.reduce(0){|acc,i|
-        acc + (p[i] + v[i]*t + a[i]*t*(t+1)/2).abs
-    }, idx]
-}.min{|x,y| x[0] <=> y[0]}
+a = STDIN.read.split("\n").map{|inp|
+    inp.scan(/<[^>]*>/).map{|x| x[1...-1].split(',').map(&:strip).map(&:to_i)}
+}.each_with_index.to_a
+
+res = 100000.times.reduce(a){|v|
+    v.each{|x|
+        3.times{|y|
+            x[0][1][y] += x[0][2][y]
+            x[0][0][y] += x[0][1][y]
+        }
+    }
+    v.group_by{|x| x[0][0]}.select{|k,r| r.count==1}.map{|k,r| r[0]}
+}
+
+puts res.length
