@@ -13,14 +13,20 @@ dirs = [[0, -1], [1, 0], [0, 1], [-1, 0]]
 
 cnt = 0
 
-10000.times{
+10000000.times{
     #puts m.join "\n"
-    if m[y][x] == '.'
+    case m[y][x]
+    when '.'
         d = (d-1)%4
-        m[y][x] = '#'
-        cnt += 1
-    else
+        m[y][x] = 'W'
+    when '#'
         d = (d+1)%4
+        m[y][x] = 'F'
+    when 'W'
+        m[y][x] = '#'
+        cnt+=1
+    when 'F'
+        d = (d+2)%4
         m[y][x] = '.'
     end
     x += dirs[d][0]
