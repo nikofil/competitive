@@ -1,37 +1,5 @@
-lastsnd = 0
-h = Hash.new{|x,y| x[y] = 0}
-def acc(h, v)
-    if v.class == Integer
-        v
-    else
-        h[v]
-    end
-end
+require 'prime'
 
-ins = STDIN.read.split("\n")
-c = 0
-cnt = 0
-loop do
-    insn = ins[c]
-    break if not insn
-    x = insn.split.map{|x| if x.to_i.to_s == x then x.to_i else x end}
-    case x[0]
-    when 'snd'
-        lastsnd = acc(h, x[1])
-    when 'set'
-        h[x[1]] = acc(h, x[2])
-    when 'sub'
-        h[x[1]] -= acc(h, x[2])
-    when 'mul'
-        h[x[1]] *= acc(h, x[2])
-        cnt += 1
-    when 'mod'
-        h[x[1]] = h[x[1]] % acc(h, x[2])
-    when 'rcv'
-        break if acc(h, x[1]) > 0
-    when 'jnz'
-        c += acc(h, x[2]) - 1 if acc(h, x[1]) != 0
-    end
-    c += 1
-end
-puts cnt
+b = 109900
+c = 126900
+puts b.step(c, 17).select{|x| !Prime.prime? x}.length
