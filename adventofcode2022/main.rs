@@ -1,1 +1,1 @@
-fn main(){let mut j=include_str!("3").lines();let mut o=0u64;while let(Some(x),Some(y),Some(z))=(j.next(),j.next(),j.next()){x.bytes().filter(|c|y.contains(*c as char)&&z.contains(*c as char)).next().map(|c|o+=if c<91{c-64+26}else{c-96}as u64);}println!("{}",o);}
+fn main(){print!("{}",include_str!("4").lines().filter(|l|{if let[a,b,c,d]=l.split(&['-',','][..]).map(|c|c.parse().unwrap()).collect::<Vec<i64>>()[..]{(a-d)*(b-c)<=0}else{false}}).count());}
