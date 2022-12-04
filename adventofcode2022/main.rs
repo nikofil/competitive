@@ -1,1 +1,1 @@
-fn main(){print!("{}",include_str!("2").lines().map(|i|if let[x,_,y]=i.as_bytes(){(x+y-1)%3+1+(y-88)*3}else{0}as i64).sum::<i64>());}
+fn main(){let mut j=include_str!("3").lines();let mut o=0u64;while let(Some(x),Some(y),Some(z))=(j.next(),j.next(),j.next()){x.bytes().filter(|c|y.contains(*c as char)&&z.contains(*c as char)).next().map(|c|o+=if c<91{c-64+26}else{c-96}as u64);}println!("{}",o);}
