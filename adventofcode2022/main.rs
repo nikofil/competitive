@@ -1,8 +1,1 @@
-use std::collections::HashSet;
-use std::iter::FromIterator;
-
-fn main() {
-    include_str!("6").as_bytes().windows(14).enumerate().find(|(i,x)| {
-        HashSet::<&u8>::from_iter(*x).len() == 14
-    }).map(|(i,_)| println!("{}", i+14));
-}
+fn main(){let(mut d,mut s,mut l,mut z)=(vec![0;999],vec![0;999],0,0);include_str!("7").lines().for_each(|x|{match &x[0..3]{"$ c"=>{z+=if&x[5..]==".."{-1}else{d[z as usize]=l;l+=1;1};}"$ l"|"dir"=>{}_=>{let c=x.split(' ').next().unwrap().parse::<u64>().unwrap();for i in 0..z as usize{s[d[i]]+=c}}}});println!("{:?}",s.iter().filter(|x|40000000>=s[0]-**x).min());}
